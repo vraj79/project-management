@@ -1,6 +1,8 @@
 import Modal from "@/components/Modal";
 import { useCreateProjectMutation } from "@/state/api";
 import React from "react";
+import { formatISO } from "date-fns";
+import { inputStyles } from "@/lib/utils";
 
 type Props = {
   isOpen: boolean;
@@ -17,16 +19,24 @@ const ModalNewProject = ({ isOpen, onClose }: Props) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!projectName || !startDate || !endDate) return;
-    await createProject({ name: projectName, description, startDate, endDate });
+    const formattedStartDate = formatISO(new Date(startDate), {
+      representation: "complete",
+    });
+    const formattedEndDate = formatISO(new Date(endDate), {
+      representation: "complete",
+    });
+    await createProject({
+      name: projectName,
+      description,
+      startDate: formattedStartDate,
+      endDate: formattedEndDate,
+    });
     onClose();
   };
 
   const isFormValid = () => {
     return projectName && startDate && endDate;
   };
-
-  const inputStyles =
-    "w-full rounded border borderp-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} name="Create New Project">

@@ -19,6 +19,7 @@ const Project = ({ params }: Props) => {
   return (
     <div>
       {/* MODAL NEW TASK */}
+      {/* <ModalNewTask /> */}
       <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === "Board" && (
         <BoardView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
