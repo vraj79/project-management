@@ -100,4 +100,5 @@ export const dataGridSxStyles = (isDarkMode: boolean) => {
 export const inputStyles =
   "w-full rounded border borderp-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
 
-export const selectStyles = ''
+export const selectStyles =
+  "block w-full rounded border border-gray-300 px-3 py-2 dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
