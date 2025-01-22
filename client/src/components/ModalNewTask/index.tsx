@@ -51,6 +51,7 @@ const ModalNewTask = ({ isOpen, onClose, projectId }: Props) => {
     return title && authorUserId;
   };
 
+  
   return (
     <Modal isOpen={isOpen} onClose={onClose} name="Create Task">
       <form className="mt-4 space-y-6" onSubmit={handleSubmit}>
