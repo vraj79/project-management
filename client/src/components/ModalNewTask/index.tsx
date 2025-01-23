@@ -26,12 +26,16 @@ const ModalNewTask = ({ isOpen, onClose, projectId }: Props) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title && !authorUserId) return;
-    const formattedStartDate = formatISO(new Date(startDate), {
-      representation: "complete",
-    });
-    const formattedDueDate = formatISO(new Date(dueDate), {
-      representation: "complete",
-    });
+    const formattedStartDate =
+      startDate &&
+      formatISO(new Date(startDate), {
+        representation: "complete",
+      });
+    const formattedDueDate =
+      dueDate &&
+      formatISO(new Date(dueDate), {
+        representation: "complete",
+      });
     await createTask({
       title,
       description,
@@ -51,7 +55,6 @@ const ModalNewTask = ({ isOpen, onClose, projectId }: Props) => {
     return title && authorUserId;
   };
 
-  
   return (
     <Modal isOpen={isOpen} onClose={onClose} name="Create Task">
       <form className="mt-4 space-y-6" onSubmit={handleSubmit}>
