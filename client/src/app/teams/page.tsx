@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useAppSelector } from "../redux";
-import { useGetUsersQuery } from "@/state/api";
+import { useGetTeamsQuery } from "@/state/api";
 import Header from "@/components/Header";
 import {
   DataGrid,
@@ -11,7 +11,6 @@ import {
   GridToolbarExport,
   GridToolbarFilterButton,
 } from "@mui/x-data-grid";
-import Image from "next/image";
 import { dataGridClassName, dataGridSxStyles } from "@/lib/utils";
 
 const CustomToolBar = () => (
@@ -23,50 +22,41 @@ const CustomToolBar = () => (
 
 const columns: GridColDef[] = [
   {
-    field: "userId",
-    headerName: "User ID",
-    width: 150,
+    field: "id",
+    headerName: "Team ID",
+    width: 250,
   },
   {
-    field: "username",
-    headerName: "Username",
-    width: 150,
+    field: "teamName",
+    headerName: "Team Name",
+    width: 250,
   },
   {
-    field: "profilePictureUrl",
-    headerName: "Profile Picture",
-    width: 150,
-    renderCell: (params) => (
-      <div className="flex h-full w-full items-center justify-center">
-        <div className="h-9 w-9">
-          <Image
-            src={`/${params.value}`}
-            alt={params.row.username}
-            width={100}
-            height={50}
-            className="h-full rounded-full object-cover"
-          />
-        </div>
-      </div>
-    ),
+    field: "productOwnerUsername",
+    headerName: "Product Owner",
+    width: 250,
+  },
+  {
+    field: "projectManagerUsername",
+    headerName: "Product Manager",
+    width: 250,
   },
 ];
 
-const Users = () => {
+const Teams = () => {
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
-  const { data: users, isLoading, isError } = useGetUsersQuery();
+  const { data: tasks, isLoading, isError } = useGetTeamsQuery();
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error fetching users</div>;
 
   return (
     <div className="flex w-full flex-col p-8">
-      <Header name="Users" />
+      <Header name="Teams" />
       <div style={{ minHeight: 500, width: "100%" }}>
         <DataGrid
           columns={columns}
-          rows={users || []}
-          getRowId={(row) => row.userId}
+          rows={tasks || []}
           pagination
           slots={{ toolbar: CustomToolBar }}
           className={dataGridClassName}
@@ -77,4 +67,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Teams;
