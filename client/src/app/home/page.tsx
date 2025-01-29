@@ -58,9 +58,8 @@ const HomePage = (props: Props) => {
     count: statusCount[key],
   }));
 
-  const tasksColumns: GridColDef[] = [
+  const tasksColumns: GridColDef[] = [];
 
-  ]
   return (
     <div>
       <p>HomePage</p>
