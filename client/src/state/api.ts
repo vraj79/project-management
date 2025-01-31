@@ -95,6 +95,13 @@ export const api = createApi({
       providesTags: (result) =>
         result ? result.map(({ id }) => ({ type: "Tasks", id })) : [],
     }),
+    getTasksByUser: build.query<Task[], number>({
+      query: (userId) => `/tasks/user/${userId}`,
+      providesTags: (result, error, userId) =>
+        result
+          ? result?.map(({ id }) => ({ type: "Tasks", id }))
+          : [{ type: "Tasks", id: userId }],
+    }),
     createTask: build.mutation<Task, Partial<Task>>({
       query: (task) => ({
         url: "/tasks",
@@ -136,4 +143,5 @@ export const {
   useSearchQuery,
   useGetUsersQuery,
   useGetTeamsQuery,
+  useGetTasksByUserQuery,
 } = api;

@@ -7,10 +7,10 @@ import { inputStyles, selectStyles } from "@/lib/utils";
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  projectId: string;
+  projectId?: string | null;
 };
 
-const ModalNewTask = ({ isOpen, onClose, projectId }: Props) => {
+const ModalNewTask = ({ isOpen, onClose, projectId = null }: Props) => {
   const [createTask, { isLoading }] = useCreateTaskMutation();
 
   const [title, setTitle] = useState("");
@@ -22,10 +22,11 @@ const ModalNewTask = ({ isOpen, onClose, projectId }: Props) => {
   const [dueDate, setDueDate] = React.useState("");
   const [authorUserId, setAuthorUserId] = React.useState("");
   const [assignedUserId, setAssignedUserId] = React.useState("");
+  const [taskPrId, setTaskPrId] = React.useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title && !authorUserId) return;
+    if (!title || !authorUserId || !(projectId !== null || taskPrId)) return;
     const formattedStartDate =
       startDate &&
       formatISO(new Date(startDate), {
@@ -46,7 +47,7 @@ const ModalNewTask = ({ isOpen, onClose, projectId }: Props) => {
       dueDate: formattedDueDate,
       authorUserId: parseInt(authorUserId),
       assignedUserId: parseInt(assignedUserId),
-      projectId: parseInt(projectId),
+      projectId: projectId !== null ? Number(projectId) : Number(taskPrId),
     });
     onClose();
   };
