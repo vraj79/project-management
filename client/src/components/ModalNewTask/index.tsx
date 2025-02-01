@@ -52,6 +52,7 @@ const ModalNewTask = ({ isOpen, onClose, projectId = null }: Props) => {
     onClose();
   };
 
+
   const isFormValid = () => {
     return title && authorUserId;
   };
