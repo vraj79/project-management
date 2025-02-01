@@ -52,9 +52,8 @@ const ModalNewTask = ({ isOpen, onClose, projectId = null }: Props) => {
     onClose();
   };
 
-
   const isFormValid = () => {
-    return title && authorUserId;
+    return title && authorUserId && !(projectId !== null || taskPrId);
   };
 
   return (
@@ -123,6 +122,15 @@ const ModalNewTask = ({ isOpen, onClose, projectId = null }: Props) => {
           value={assignedUserId}
           onChange={(e) => setAssignedUserId(e.target.value)}
         />
+        {projectId === null && (
+          <input
+            type="text"
+            className={inputStyles}
+            placeholder="Project ID"
+            value={taskPrId}
+            onChange={(e) => setTaskPrId(e.target.value)}
+          />
+        )}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-2">
           <input
             type="date"
