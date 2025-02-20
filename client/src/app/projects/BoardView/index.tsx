@@ -163,7 +163,7 @@ const Task = ({ task }: TaskProps) => {
     >
       {task.attachments && task.attachments.length > 0 && (
         <Image
-          src={`/${task.attachments?.[0]?.fileUrl}`}
+          src={`https://vraj-pm-s3-images.s3.us-east-1.amazonaws.com/${task.attachments?.[0]?.fileUrl}`}
           alt={task.attachments?.[0]?.fileName}
           width={400}
           height={200}
@@ -211,7 +211,7 @@ const Task = ({ task }: TaskProps) => {
           <div className="flex -space-x-[6px] overflow-hidden">
             {task.assignee && (
               <Image
-                src={`/${task?.assignee?.profilePictureUrl!}`}
+                src={`https://vraj-pm-s3-images.s3.us-east-1.amazonaws.com/${task?.assignee?.profilePictureUrl!}`}
                 alt={task?.assignee?.username}
                 width={30}
                 height={30}
@@ -220,7 +220,7 @@ const Task = ({ task }: TaskProps) => {
             )}
             {task.author && (
               <Image
-                src={`/${task?.author?.profilePictureUrl!}`}
+                src={`https://vraj-pm-s3-images.s3.us-east-1.amazonaws.com/${task?.author?.profilePictureUrl!}`}
                 alt={task?.author?.username}
                 width={30}
                 height={30}
