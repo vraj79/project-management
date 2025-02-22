@@ -34,6 +34,9 @@ app.use("/tasks", taskRoutes_1.default);
 app.use("/search", searchRoutes_1.default);
 app.use("/users", userRoutes_1.default);
 app.use("/teams", teamRoutes_1.default);
+app.use("*", (req, res) => {
+    res.status(404).json({ message: "Route not found" });
+});
 const PORT = Number(process.env.PORT) || 8000;
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);

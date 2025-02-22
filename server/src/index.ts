@@ -34,6 +34,10 @@ app.use("/search", searchRoutes);
 app.use("/users", userRoutes);
 app.use("/teams", teamRoutes);
 
+app.use("*", (req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
+
 const PORT = Number(process.env.PORT) || 8000;
 
 app.listen(PORT, "0.0.0.0", () => {
