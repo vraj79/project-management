@@ -8,6 +8,7 @@ import { dataGridClassName, dataGridSxStyles } from "@/lib/utils";
 import {
   Priority,
   Task,
+  useGetAuthUserQuery,
   //   useGetAuthUserQuery,
   useGetTasksByUserQuery,
 } from "@/state/api";
@@ -77,14 +78,13 @@ const ReusablePriorityPage = ({ priority }: Props) => {
   const [view, setView] = useState("list");
   const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
 
-  //   const { data: currentUser } = useGetAuthUserQuery({});
-  //   const userId = currentUser?.userDetails?.userId ?? null;
-  const userId = 6;
+  const { data: currentUser } = useGetAuthUserQuery({});
+  const userId = currentUser?.userDetails?.userId ?? null;
   const {
     data: tasks,
     isLoading,
     isError: isTasksError,
-  } = useGetTasksByUserQuery(userId, {
+  } = useGetTasksByUserQuery(userId as number, {
     skip: userId === null,
   });
 
